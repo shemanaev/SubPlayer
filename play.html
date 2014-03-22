@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SubtitlePlayer</title>
+    <!-- vendor -->
+    <link rel="stylesheet" href="vendor/normalize.css/normalize.css">
+    <link rel="stylesheet" href="vendor/flowplayer/skin/playful.css">
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css">
+    <!-- /vendor -->
+    <link rel="stylesheet" href="styles/flowplayer.css">
+    <link rel="stylesheet" href="styles/play.css">
+  </head>
+  <body>
+
+    <div class="player">
+    </div>
+
+    <div id="drop-zone" class="drop-zone">
+      <p>Drop file here</p>
+    </div>
+
+    <div id="translation" class="translation">
+      <p class="translation-original">some text</p>
+      <ul>
+        <li>какой-то текст</li>
+      </ul>
+    </div>
+
+    <div class="modal fade" id="subtitles-search-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Select subtitles</h4>
+          </div>
+          <div class="modal-body">
+
+            <p>Drag and drop srt file here</p>
+
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Movie title" id="subtitles-query">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="subtitles-go">Go!</button>
+                  </span>
+                </div><!-- /input-group -->
+              </div><!-- /.col-lg-6 -->
+            </div><!-- /.row -->
+
+            <br>
+
+            <div id="subtitles-selector" class="btn-group-vertical subtitles-selector" data-toggle="buttons">
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">Select</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- templates -->
+    <script type="text/template" data-name="player">
+      <video autoplay>
+        <source type="{{!it.type}}" src="{{!it.src}}">
+        <track kind="subtitles" src="{{!it.sub}}" srclang="ru" label="Russian" default>
+      </video>
+    </script>
+
+    <script type="text/template" data-name="subtitles-item">
+      <label class="btn btn-default">
+        <input type="radio" name="subtitles" value="{{!it.uri}}"> {{!it.title}}
+      </label>
+    </script>
+
+    <script type="text/template" data-name="translation">
+      <p class="original">{{!it.original}}</p>
+      <ul>
+        {{~ it.translations :p }}
+          {{~ p.tr :t }}
+            <li>{{!t.text}}</li>
+          {{~}}
+        {{~}}
+      </ul>
+      <p class="copyright">Реализовано с помощью сервиса «<a href="http://api.yandex.ru/dictionary/">Яндекс.Словарь</a>»</p>
+    </script>
+    <!-- /templates -->
+
+    <!-- vendor -->
+    <script src="vendor/doT/doT.min.js"></script>
+    <script src="vendor/jquery/jquery-1.11.0.min.js"></script>
+    <script src="vendor/flowplayer/flowplayer.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- /vendor -->
+    <script src="scripts/play.js"></script>
+
+  </body>
+</html>

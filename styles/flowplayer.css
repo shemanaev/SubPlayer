@@ -1,0 +1,28 @@
+
+/* Background on fullscreen */
+.flowplayer.is-fullscreen {
+  background-color: #000;
+}
+
+/* Don't show timeline on mouse-out */
+.flowplayer.is-mouseout .fp-timeline {
+  height: 0px;
+  border: none;
+}
+
+.flowplayer .fp-subtitle.fp-active > p {
+  font-size: 2em;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.flowplayer .fp-subtitle.fp-active > p > span {
+  cursor: pointer;
+}
+
+a.fp-embed {
+  display: none !important;
+}
+
+.is-paused.flowplayer .fp-ui {
+    background: none;
+}

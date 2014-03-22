@@ -1,0 +1,62 @@
+
+body {
+  background-color: #000;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+
+.drop-zone {
+  border: 7px dashed #ccc;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  z-index: 9999999;
+  background-color: #333
+}
+
+.drop-zone > p {
+  font-size: 20pt;
+  color: #ccc;
+  margin: 25% 43%;
+  width: 100%;
+}
+
+.subtitles-selector {
+  width: 100%;
+}
+
+.player {
+  width: 90%;
+  margin: 2% 5%;
+}
+
+.word-over {
+  background-color: rgba(255, 200, 0, 0.6);
+}
+
+.translation {
+  position: absolute;
+  background-color: #fff;
+  z-index: 9999;
+  padding: 7px 7px 0px 7px;
+  display: none;
+  border: 2px solid #ddd;
+}
+
+.translation > ul {
+  margin-left: -20px;
+}
+
+.translation .original {
+  font-weight: bold;
+}
+
+.translation .copyright {
+  float: right;
+  font-style: italic;
+  font-size: 90%;
+  color: #ccc;
+}

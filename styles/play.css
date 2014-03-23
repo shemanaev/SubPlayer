@@ -48,6 +48,11 @@ body {
   width: 100%;
 }
 
+.subtitles-selector .btn {
+  overflow: hidden;
+  text-align: left;
+}
+
 .player {
   width: 90%;
   margin: 2% 5%;

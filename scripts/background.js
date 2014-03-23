@@ -1,18 +1,5 @@
 
-
 var videos = {} // All captured videos
-
-
-/**
- * Build URL query from arguments object
- */
-function buildUrl(base, args) {
-  var s = base + '?'
-  for (var arg in args) {
-    s += encodeURIComponent(arg) + '=' + encodeURIComponent(args[arg]) + '&'
-  }
-  return s.slice(0, s.length - 1)
-}
 
 /**
  * Open player page on browserAcrion button click
@@ -22,10 +9,12 @@ function openPlayer(tab) {
   console.log('open', video, tab.id, tab)
   if (!video) return
 
+  var host = parseUrl(tab.url).host
+  var title = titleExtractor.extract(host, tab.title)
   var args =
     { src: video.src
     , type: video.type
-    , title: tab.title
+    , title: title
     }
   var url = buildUrl(chrome.extension.getURL('play.html'), args)
 
@@ -64,10 +53,11 @@ function isVideo(type) {
  * Callback on Chrome received headers
  */
 function headersReceived(e) {
+  var CONTENT_TYPE = 'content-type'
   var h = e.responseHeaders
   for (var i = 0; i < h.length; i++) {
     var t = h[i]
-    if (t.name === 'Content-Type') {
+    if (t.name.toLowerCase() === CONTENT_TYPE) {
       if (isVideo(t.value)) {
         videos[e.tabId] = { src: e.url, type: t.value }
         console.log(videos[e.tabId])
@@ -77,7 +67,27 @@ function headersReceived(e) {
   }
 }
 
+/**
+ * Replace the User-Agent header for opensubtitles.org
+ */
+function openSubtitlesUA(e) {
+  var USER_AGENT = 'user-agent'
+  var h = e.requestHeaders
+  for (var i = 0; i < h.length; i++) {
+    var t = h[i]
+    if (t.name.toLowerCase() == 'user-agent') {
+      t.value = OS_USER_AGENT
+      break
+    }
+  }
+  return {requestHeaders: h}
+}
+
 // Setup Chrome callbacks
 chrome.tabs.onRemoved.addListener(tabClosed)
 chrome.browserAction.onClicked.addListener(openPlayer)
 chrome.webRequest.onHeadersReceived.addListener(headersReceived, {urls: ['<all_urls>']}, ['responseHeaders'])
+chrome.webRequest.onBeforeSendHeaders.addListener(openSubtitlesUA,
+  {urls: ['​http://api.opensubtitles.org/xml-rpc'], types: ['main_frame', 'sub_frame']},
+  ['blocking', 'requestHeaders']
+)

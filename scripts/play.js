@@ -1,20 +1,4 @@
 
-var EXTENSION_NAME = 'SubtitlePlayer'
-var YANDEX_TRANSLATOR_BASE = 'https://dictionary.yandex.net/api/v1/dicservice.json/lookup'
-var YANDEX_TRANSLATOR_KEY = 'KEY_HERE'
-
-/**
- * Build URL query from arguments object
- */
-function buildUrl(base, args) {
-  var s = base + '?'
-  for (var arg in args) {
-    s += encodeURIComponent(arg) + '=' + encodeURIComponent(args[arg]) + '&'
-  }
-  return s.slice(0, s.length - 1)
-}
-
-
 $(function () {
   var JST = {} // JS templates
   var params = {} // url parameters
@@ -28,7 +12,25 @@ $(function () {
   var $subQuery = $('#subtitles-query')
   var $subSelector = $('#subtitles-selector')
   var api // flowplayer API
-  var transCache = {}
+  var transCache = {} // tranlations cache
+  var osToken = null // opensubtitles.org API token
+
+  // Log in to opensubtitles.org
+  function osLoginDone(response, status, jqXHR) {
+    osToken = response[0].token
+    console.log('xmlrpc login done', response, osToken)
+  }
+
+  function osLoginFail(jqXHR, status, error) {
+    console.log('xmlrpc login', error)
+  }
+
+  var params =
+    { url: OS_BASE
+    , methodName: 'LogIn'
+    , params: [null, null, null, OS_USER_AGENT]
+    }
+  $.xmlrpc(params).done(osLoginDone).fail(osLoginFail)
 
   // compile all templates
   $('script[type="text/template"]').each(function (e) {
@@ -180,16 +182,63 @@ $(function () {
   })
 
   $subGo.bind('click', function (e) {
-    //$.get()
-    //$subSelector.append(JST['subtitles-item']({ uri: 'dataUri', title: 'title' }))
+    function osSearchDone(response, status, jqXHR) {
+      console.log('xmlrpc search done', response)
+      var subs = response[0].data
+      var langs = {}
+      for (var i = 0; i < subs.length; i++) {
+        var sub = subs[i]
+        if (sub.SubLanguageID in langs) continue
+        langs[sub.SubLanguageID] = true
+        $subSelector.append(JST['subtitles-item']({ uri: sub.SubDownloadLink, title: sub.SubFileName, lang: sub.SubLanguageID }))
+      }
+    }
+
+    function osSearchFail(jqXHR, status, error) {
+      console.log('xmlrpc search', error)
+      // TODO: display error
+    }
+
+    var text = $subQuery.val()
+    var params =
+      { url: OS_BASE
+      , methodName: 'SearchSubtitles'
+      , params: [osToken, [{sublanguageid: 'eng,rus', query: text/* + ' YIFY'*/}]/*, {limit: 15}*/]
+      }
+    // TODO: add progressbar or something here
+    $subSelector.html('')
+    $.xmlrpc(params).done(osSearchDone).fail(osSearchFail)
   })
 
-  // run player on modal hide
-  $subModal.on('hide.bs.modal', function (e) {
-    var sub = $('input[name=subtitles]:checked').val()
+  function setupPlayer(sub) {
     $player.html(JST['player']({ src: params['src'], type: params['type'], sub: sub }))
     $player.flowplayer()
     api = $player.data('flowplayer')
+  }
+
+  // run player on modal hide
+  $subModal.on('hide.bs.modal', function (e) {
+    var HTTP_PROTO = 'http'
+    var sub = $('input[name=subtitles]:checked').val()
+    if (HTTP_PROTO === sub.substr(0, HTTP_PROTO.length)) {
+      // fetch subtitles
+      function getSubsDone(response) {
+        var gunzip = new Zlib.Gunzip(response)
+        var plain = gunzip.decompress()
+        _arrayBufferToString(plain, function (text) {
+          setupPlayer('data:' + text)
+        })
+      }
+
+      function getSubsFail(error) {
+        // TODO: display error
+        console.log('getSubsFail', error)
+      }
+
+      getBinary(sub, getSubsDone, getSubsFail)
+    } else {
+      setupPlayer(sub)
+    }
   })
 
   // open subtitles search dialog

@@ -81,6 +81,7 @@
 
     <script type="text/template" data-name="subtitles-item">
       <label class="btn btn-default">
+        <span class="label label-default">{{!it.lang}}</span>
         <input type="radio" name="subtitles" value="{{!it.uri}}"> {{!it.title}}
       </label>
     </script>
@@ -101,9 +102,13 @@
     <!-- vendor -->
     <script src="vendor/doT/doT.min.js"></script>
     <script src="vendor/jquery/jquery-1.11.0.min.js"></script>
+    <script src="vendor/jquery-xmlrpc/jquery.xmlrpc.js"></script>
     <script src="vendor/flowplayer/flowplayer.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendor/zlib.js/bin/gunzip.min.js"></script>
     <!-- /vendor -->
+    <script src="scripts/config.js"></script>
+    <script src="scripts/utils.js"></script>
     <script src="scripts/play.js"></script>
 
   </body>

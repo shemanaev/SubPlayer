@@ -143,8 +143,7 @@ $(function () {
     return false
   }
 
-  function fileDrop(e) {
-    var file = e.originalEvent.dataTransfer.files[0]
+  function fileRead(file) {
     var reader = new FileReader()
     reader.onload = function(event) {
       var dataUri = 'data:' + event.target.result
@@ -160,6 +159,11 @@ $(function () {
     reader.readAsText(file)
     // reader.readAsDataURL(file)
     // data:application/x-subrip;charset=utf-8,
+  }
+
+  function fileDrop(e) {
+    var file = e.originalEvent.dataTransfer.files[0]
+    fileRead(file)
     $dropZone.hide()
     return false
   }
@@ -167,6 +171,13 @@ $(function () {
   $body.bind('dragenter', dragOver)
   $body.bind('dragover', dragOver)
   $body.bind('drop', fileDrop)
+
+  // Subtitles select file
+  $document.on('change', '.btn-file :file', function() {
+    var t = $(this)
+    var file = t.get(0).files[0]
+    fileRead(file)
+  })
 
   $subGo.bind('click', function (e) {
     //$.get()

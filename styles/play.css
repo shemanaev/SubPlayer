@@ -86,3 +86,7 @@ body {
   font-size: 90%;
   color: #ccc;
 }
+
+#subtitles-spinner {
+  margin-left: 49%;
+}

@@ -6,11 +6,14 @@ $(function () {
   var $body = $('body')
   var $player = $('.player')
   var $translation = $('#translation')
+  var $translationContent = $('#translation-content')
+  var $translationSpinner = $('#translation-spinner')
   var $dropZone = $('#drop-zone')
   var $subModal = $('#subtitles-search-modal')
   var $subGo = $('#subtitles-go')
   var $subQuery = $('#subtitles-query')
   var $subSelector = $('#subtitles-selector')
+  var $subSpinner = $('#subtitles-spinner')
   var api // flowplayer API
   var transCache = {} // tranlations cache
   var osToken = null // opensubtitles.org API token
@@ -93,18 +96,28 @@ $(function () {
   })
 
   // highlight hover word and show translation
-  function showTranslation(text, translations) {
-    $translation.html(JST['translation']({ original: text, translations: translations.def }))
-    $translation.show()
+  function translationAdjustPosition() {
     $translation.css('top', $(subSel).offset().top - $translation.height() - 10)
     $translation.css('left', ($document.width() - $translation.width()) / 2)
+  }
+  function translationShow(text, translations) {
+    $translationContent.html(JST['translation']({ original: text, translations: translations.def }))
+    $translationSpinner.hide()
+    translationAdjustPosition()
+  }
+  function translationShowLoading() {
+    $translationContent.html('')
+    $translation.show()
+    $translationSpinner.show()
+    translationAdjustPosition()
   }
   $document.on('mouseenter', wordSel, function (e) {
     var t = $(this)
     t.addClass('word-over')
+    translationShowLoading()
     var text = t.html()
     if (text in transCache) {
-      showTranslation(text, transCache[text])
+      translationShow(text, transCache[text])
       return
     }
     var args =
@@ -115,7 +128,7 @@ $(function () {
     var url = buildUrl(YANDEX_TRANSLATOR_BASE, args)
     $.get(url, function (res) {
       transCache[text] = res
-      showTranslation(text, res)
+      translationShow(text, res)
     })
   })
   $document.on('mouseleave', wordSel, function (e) {
@@ -196,6 +209,11 @@ $(function () {
       // TODO: display error
     }
 
+    function osSearchAlways() {
+      $subSpinner.hide()
+    }
+
+    $subSpinner.show()
     var text = $subQuery.val()
     var params =
       { url: OS_BASE
@@ -204,7 +222,7 @@ $(function () {
       }
     // TODO: add progressbar or something here
     $subSelector.html('')
-    $.xmlrpc(params).done(osSearchDone).fail(osSearchFail)
+    $.xmlrpc(params).done(osSearchDone).fail(osSearchFail).always(osSearchAlways)
   })
 
   function setupPlayer(sub) {

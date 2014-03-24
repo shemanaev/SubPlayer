@@ -87,6 +87,10 @@ body {
   color: #ccc;
 }
 
+.translation .copyright a {
+  color: #ccc;
+}
+
 #subtitles-spinner {
   margin-left: 49%;
 }

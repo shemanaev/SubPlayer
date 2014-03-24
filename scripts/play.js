@@ -191,6 +191,14 @@ $(function () {
     fileRead(file)
   })
 
+  $subQuery.bind('keyup', function (e) {
+    if (event.which === 13) {
+      $subGo.click()
+      return false
+    }
+    return true
+  })
+
   $subGo.bind('click', function (e) {
     function osSearchDone(response, status, jqXHR) {
       console.log('xmlrpc search done', response)

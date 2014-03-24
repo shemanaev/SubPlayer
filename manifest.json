@@ -1,4 +1,4 @@
-{ "name": "SubtitlePlayer"
+{ "name": "SubPlayer"
 , "version": "0.1"
 , "description": "Play any video with subtitles."
 , "manifest_version": 2

@@ -61,7 +61,7 @@ $(function () {
 
   // pause on mouse over subtitles
   var subSel = '.flowplayer .fp-subtitle.fp-active'
-  var wordSel = '.flowplayer .fp-subtitle.fp-active > p > span'
+  var wordSel = '.flowplayer .fp-subtitle.fp-active p span'
   var pauseTimer = null
   var translationTimer = null
 
@@ -74,10 +74,10 @@ $(function () {
   }
 
   // split replica by words
-  $document.on('mouseenter', '.flowplayer .fp-subtitle.fp-active > p', function (e) {
+  $document.on('mouseenter', '.flowplayer .fp-subtitle.fp-active p', function (e) {
     var t = $(this)
     if (!t.data('splitted')) {
-      var html = t.html().replace(/([a-zа-яё0-9'-]+)/ig, '<span>$1</span>')
+      var html = t.html().replace(/([^<\/>\s.][a-zа-яё0-9'-]+)/ig, '<span>$1</span>')
       t.html(html)
       t.data('splitted', true)
     }

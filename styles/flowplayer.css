@@ -10,12 +10,12 @@
   border: none;
 }
 
-.flowplayer .fp-subtitle.fp-active > p {
+.flowplayer .fp-subtitle.fp-active p {
   font-size: 2em;
   background: rgba(0, 0, 0, 0.05);
 }
 
-.flowplayer .fp-subtitle.fp-active > p > span {
+.flowplayer .fp-subtitle.fp-active p span {
   cursor: pointer;
 }
 
@@ -24,5 +24,9 @@ a.fp-embed {
 }
 
 .is-paused.flowplayer .fp-ui {
-    background: none;
+  background: none;
+}
+
+.flowplayer .fp-subtitle i {
+  font-style: italic;
 }

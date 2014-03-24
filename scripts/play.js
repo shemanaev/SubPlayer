@@ -77,7 +77,7 @@ $(function () {
   $document.on('mouseenter', '.flowplayer .fp-subtitle.fp-active p', function (e) {
     var t = $(this)
     if (!t.data('splitted')) {
-      var html = t.html().replace(/([^<\/>\s.][a-zа-яё0-9'-]+)/ig, '<span>$1</span>')
+      var html = t.html().replace(/([^<\/>\s."][a-zа-яё0-9'-]+)/ig, '<span>$1</span>')
       t.html(html)
       t.data('splitted', true)
     }

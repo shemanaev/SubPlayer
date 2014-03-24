@@ -55,12 +55,13 @@ function isVideo(type) {
 function headersReceived(e) {
   var CONTENT_TYPE = 'content-type'
   var h = e.responseHeaders
+  var tabId = e.tabId
   for (var i = 0; i < h.length; i++) {
     var t = h[i]
     if (t.name.toLowerCase() === CONTENT_TYPE) {
       if (isVideo(t.value)) {
-        videos[e.tabId] = { src: e.url, type: t.value }
-        console.log(videos[e.tabId])
+        videos[tabId] = { src: e.url, type: t.value }
+        chrome.browserAction.setIcon({ path: 'icons/icon_19_green.png', tabId: tabId })
       }
       break
     }

@@ -199,22 +199,28 @@ $(function () {
     return true
   })
 
-  $subGo.bind('click', function (e) {
+  function findSubtitlesClick(e) {
+    if (!osToken) {
+      return setTimeout(findSubtitlesClick.bind(this), 200)
+    }
+
     function osSearchDone(response, status, jqXHR) {
-      console.log('xmlrpc search done', response)
       var subs = response[0].data
       var langs = {}
-      for (var i = 0; i < subs.length; i++) {
-        var sub = subs[i]
-        if (sub.SubLanguageID in langs) continue
-        langs[sub.SubLanguageID] = true
-        $subSelector.append(JST['subtitles-item']({ uri: sub.SubDownloadLink, title: sub.SubFileName, lang: sub.SubLanguageID }))
+      if (subs) {
+        for (var i = 0; i < subs.length; i++) {
+          var sub = subs[i]
+          if (sub.SubLanguageID in langs) continue
+          langs[sub.SubLanguageID] = true
+          $subSelector.append(JST['subtitles-item']({ uri: sub.SubDownloadLink, title: sub.SubFileName, lang: sub.SubLanguageID }))
+        }
+      } else {
+        $subSelector.append(JST['subtitles-error']('Nothing found'))
       }
     }
 
     function osSearchFail(jqXHR, status, error) {
-      console.log('xmlrpc search', error)
-      // TODO: display error
+      $subSelector.append(JST['subtitles-error']('Error while searching subtitles: ' + error))
     }
 
     function osSearchAlways() {
@@ -228,10 +234,11 @@ $(function () {
       , methodName: 'SearchSubtitles'
       , params: [osToken, [{sublanguageid: 'eng,rus', query: text/* + ' YIFY'*/}]/*, {limit: 15}*/]
       }
-    // TODO: add progressbar or something here
     $subSelector.html('')
     $.xmlrpc(params).done(osSearchDone).fail(osSearchFail).always(osSearchAlways)
-  })
+  }
+
+  $subGo.bind('click', findSubtitlesClick)
 
   function setupPlayer(sub) {
     $player.html(JST['player']({ src: params['src'], type: params['type'], sub: sub }))

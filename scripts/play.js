@@ -264,6 +264,10 @@ $(function () {
     }
   })
 
+  $subModal.on('shown.bs.modal', function (e) {
+    $subQuery.focus()
+  })
+
   // open subtitles search dialog
   document.title = params['title'] + ' | ' + EXTENSION_NAME
   $subQuery.val(params['title'])

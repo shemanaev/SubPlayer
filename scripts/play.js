@@ -82,6 +82,7 @@ $(function () {
       t.data('splitted', true)
     }
   })
+
   // play/pause on hover subtitles are
   $document.on('mouseenter', subSel, function (e) {
     scheduleHide(true)
@@ -90,32 +91,17 @@ $(function () {
   $document.on('mouseleave', subSel, function (e) {
     scheduleHide(false)
   })
-  // highlight hover word
-  $document.on('mouseenter', wordSel, function (e) {
-    var t = $(this)
-    t.addClass('word-over')
-  })
-  $document.on('mouseleave', wordSel, function (e) {
-    var t = $(this)
-    t.removeClass('word-over')
-  })
-  // translation block
-  $translation.on('mouseenter', function (e) {
-    scheduleHide(true)
-  })
-  $translation.on('mouseleave', function (e) {
-    scheduleHide(false)
-  })
 
+  // highlight hover word and show translation
   function showTranslation(text, translations) {
     $translation.html(JST['translation']({ original: text, translations: translations.def }))
     $translation.show()
     $translation.css('top', $(subSel).offset().top - $translation.height() - 10)
     $translation.css('left', ($document.width() - $translation.width()) / 2)
   }
-
-  $document.on('click', wordSel, function (e) {
+  $document.on('mouseenter', wordSel, function (e) {
     var t = $(this)
+    t.addClass('word-over')
     var text = t.html()
     if (text in transCache) {
       showTranslation(text, transCache[text])
@@ -131,6 +117,17 @@ $(function () {
       transCache[text] = res
       showTranslation(text, res)
     })
+  })
+  $document.on('mouseleave', wordSel, function (e) {
+    var t = $(this)
+    t.removeClass('word-over')
+  })
+  // translation block
+  $translation.on('mouseenter', function (e) {
+    scheduleHide(true)
+  })
+  $translation.on('mouseleave', function (e) {
+    scheduleHide(false)
   })
 
   // Subtitles drag&drop

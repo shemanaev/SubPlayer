@@ -64,11 +64,12 @@ body {
 
 .translation {
   position: absolute;
-  background-color: #fff;
+  background-color: #000;
   z-index: 9999;
   padding: 7px 7px 0px 7px;
   display: none;
-  border: 2px solid #ddd;
+  border: 2px solid #333;
+  color: #fff;
 }
 
 .translation > ul {

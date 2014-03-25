@@ -66,7 +66,7 @@ $(function () {
         var gunzip = new Zlib.Gunzip(response)
         var plain = gunzip.decompress()
         _arrayBufferToString(plain, function (text) {
-          setupPlayer('data:' + text)
+          setupPlayer(text)
         })
       }
 

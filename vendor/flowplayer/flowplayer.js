@@ -2260,10 +2260,6 @@ flowplayer(function(player, root, engine) {
 
    player.subtitles = [];
 
-   var url = track.attr("src");
-
-   if (!url) return;
-
    function parseSubtitles(txt) {
 
       for (var i = 0, lines = txt.split("\n"), len = lines.length, entry = {}, title, timecode, text, cue; i < len; i++) {
@@ -2304,10 +2300,13 @@ flowplayer(function(player, root, engine) {
 
    }
 
-   var DATA_URI = 'data:';
-   if (DATA_URI === url.substr(0, DATA_URI.length)) {
-      parseSubtitles(url.slice(DATA_URI.length))
+   var contents = track.attr('contents');
+   if (contents) {
+      parseSubtitles(contents);
    } else {
+      var url = track.attr("src");
+
+      if (!url) return;
       setTimeout(function() {
          $.get(url, parseSubtitles).fail(function() {
             player.trigger("error", {code: 8, url: url });
@@ -2315,6 +2314,7 @@ flowplayer(function(player, root, engine) {
          });
       });
    }
+
    var wrap = $("<div class='fp-subtitle'/>").appendTo(root),
       currentPoint;
 

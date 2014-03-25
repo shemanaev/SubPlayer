@@ -10,11 +10,11 @@
 , "background":
   { "persistent": true
   , "scripts":
-    [ "scripts/utils.js"
-    , "scripts/config.js"
-    , "scripts/title_extractor.js"
-    , "scripts/extractors/brb.to.js"
-    , "scripts/background.js"
+    [ "scripts/common/utils.js"
+    , "scripts/common/config.js"
+    , "scripts/background/title_extractor.js"
+    , "scripts/background/extractors/brb.to.js"
+    , "scripts/background/background.js"
     ]
   }
 , "permissions":

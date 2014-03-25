@@ -52,7 +52,7 @@ $(function () {
 
   function setupPlayer(sub) {
     $player.html(JST['player']({ src: urlParams['src'], type: urlParams['type'], sub: sub }))
-    $player.flowplayer()
+    $player.flowplayer({ swf: 'vendor/flowplayer/flowplayer.swf', tooltip: false })
     api = $player.data('flowplayer')
   }
 

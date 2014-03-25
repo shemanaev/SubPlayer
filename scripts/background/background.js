@@ -6,7 +6,6 @@ var videos = {} // All captured videos
  */
 function openPlayer(tab) {
   var video = videos[tab.id]
-  console.log('open', video, tab.id, tab)
   if (!video) return
 
   var host = parseUrl(tab.url).host
@@ -18,10 +17,7 @@ function openPlayer(tab) {
     }
   var url = buildUrl(chrome.extension.getURL('play.html'), args)
 
-  // ToDo: Search for subtitles or title here?
-  chrome.tabs.create({url: url}, function (tab) {
-    // created
-  })
+  chrome.tabs.create({url: url})
 }
 
 /**
@@ -40,12 +36,6 @@ function isVideo(type) {
   if (type.substr(0, VIDEO_TYPE.length) === VIDEO_TYPE) {
     return true
   }
-  // if (t === "application/octet-stream") {
-  //     if (e.indexOf(".flv") !== -1)
-  //         return !0;
-  //     if (e.indexOf(".youtube.com/") !== -1)
-  //         return !0
-  // }
   return false
 }
 

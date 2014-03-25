@@ -11,9 +11,9 @@ TitleExtractor.prototype.register = function (domain, callback) {
 }
 
 TitleExtractor.prototype.extract = function (domain, text) {
-  if (!domain in this.extractors) return text
-  var e = this.extractors[domain]
-  return e(text)
+  var res = text
+  if (domain in this.extractors) res = this.extractors[domain](text)
+  return res
 }
 
 // Bring the default instance

@@ -59,7 +59,7 @@ $(function () {
   $subModal.on('hide.bs.modal', function (e) {
     var HTTP_PROTO = 'http'
     var sub = $('input[name=subtitles]:checked').val()
-    if (HTTP_PROTO === sub.substr(0, HTTP_PROTO.length)) {
+    if (sub && HTTP_PROTO === sub.substr(0, HTTP_PROTO.length)) {
       // fetch subtitles
       function getSubsDone(response) {
         var gunzip = new Zlib.Gunzip(response)

@@ -1,7 +1,7 @@
 
 var JST = {} // JS templates
-var $document = $(document)
-var $body = $('body')
+var $document
+var $body
 
 $(function () {
   // compile all templates
@@ -9,4 +9,7 @@ $(function () {
     var t = $(this)
     JST[t.data('name')] = doT.template(t.html())
   })
+
+  $document = $(document)
+  $body = $('body')
 })

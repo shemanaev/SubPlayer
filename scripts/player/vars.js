@@ -1,15 +1,15 @@
 
 var urlParams = {} // url parameters
-var $player = $('.player')
-var $translation = $('#translation')
-var $translationContent = $('#translation-content')
-var $translationSpinner = $('#translation-spinner')
-var $dropZone = $('#drop-zone')
-var $subModal = $('#subtitles-search-modal')
-var $subGo = $('#subtitles-go')
-var $subQuery = $('#subtitles-query')
-var $subSelector = $('#subtitles-selector')
-var $subSpinner = $('#subtitles-spinner')
+var $player
+var $translation
+var $translationContent
+var $translationSpinner
+var $dropZone
+var $subModal
+var $subGo
+var $subQuery
+var $subSelector
+var $subSpinner
 var api // flowplayer API
 var transCache = {} // tranlations cache
 var osToken = null // opensubtitles.org API token
@@ -41,6 +41,17 @@ $(function () {
       var t = e.split('=')
       urlParams[t[0]] = decodeURIComponent(t[1])
     })
+
+  $player = $('.player')
+  $translation = $('#translation')
+  $translationContent = $('#translation-content')
+  $translationSpinner = $('#translation-spinner')
+  $dropZone = $('#drop-zone')
+  $subModal = $('#subtitles-search-modal')
+  $subGo = $('#subtitles-go')
+  $subQuery = $('#subtitles-query')
+  $subSelector = $('#subtitles-selector')
+  $subSpinner = $('#subtitles-spinner')
 
   // assign page title
   document.title = urlParams['title'] + ' | ' + EXTENSION_NAME

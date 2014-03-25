@@ -73,7 +73,7 @@
 
     <!-- templates -->
     <script type="text/template" data-name="player">
-      <video autoplay>
+      <video id="player1" autoplay>
         <source type="{{!it.type}}" src="{{!it.src}}">
         <track kind="subtitles" contents="{{!it.sub}}" label="subtitles on" default>
       </video>
@@ -104,12 +104,12 @@
     <!-- /templates -->
 
     <!-- vendor -->
-    <script src="vendor/doT/doT.min.js"></script>
-    <script src="vendor/jquery/jquery-1.11.0.min.js"></script>
+    <script src="vendor/doT/doT.js"></script>
+    <script src="vendor/jquery/jquery-1.11.0.js"></script>
     <script src="vendor/jquery-xmlrpc/jquery.xmlrpc.js"></script>
     <script src="vendor/flowplayer/flowplayer.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="vendor/zlib.js/bin/gunzip.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="vendor/zlib.js/gunzip.min.js"></script>
     <!-- /vendor -->
     <script src="scripts/common/config.js"></script>
     <script src="scripts/common/utils.js"></script>

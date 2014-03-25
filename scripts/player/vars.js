@@ -1,8 +1,5 @@
 
-var JST = {} // JS templates
 var urlParams = {} // url parameters
-var $document = $(document)
-var $body = $('body')
 var $player = $('.player')
 var $translation = $('#translation')
 var $translationContent = $('#translation-content')
@@ -33,12 +30,6 @@ $(function () {
     , params: [null, null, null, OS_USER_AGENT]
     }
   $.xmlrpc(params).done(osLoginDone).fail(osLoginFail)
-
-  // compile all templates
-  $('script[type="text/template"]').each(function (e) {
-    var t = $(this)
-    JST[t.data('name')] = doT.template(t.html())
-  })
 
   // parse url parameters
   window

@@ -63,7 +63,7 @@ $(function () {
       , lang: 'en-ru'
       , text: text
       }
-    var url = buildUrl(YANDEX_TRANSLATOR_BASE, args)
+    var url = buildUrl(YANDEX_TRANSLATOR_BASE + 'lookup', args)
     $.get(url, function (res) {
       transCache[text] = res
       translationShow(text, res)

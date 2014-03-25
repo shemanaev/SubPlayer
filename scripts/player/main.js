@@ -1,5 +1,9 @@
 
-$(function () {
+$(function initMain() {
+  if (!settingsLoaded) {
+    return setTimeout(initMain.bind(this), 200)
+  }
+
   // fix annoying pause toggle only on mouse over
   $document.keyup(function (event) {
     if (event.which === 32 && $player.hasClass('is-mouseout')) {

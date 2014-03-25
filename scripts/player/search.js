@@ -38,10 +38,11 @@ $(function () {
 
     $subSpinner.show()
     var text = $subQuery.val()
+    var langs = settings.subtitlesLangs.join(',')
     var params =
       { url: OS_BASE
       , methodName: 'SearchSubtitles'
-      , params: [osToken, [{sublanguageid: 'eng,rus', query: text/* + ' YIFY'*/}]/*, {limit: 15}*/]
+      , params: [osToken, [{sublanguageid: langs, query: text}]]
       }
     $subSelector.html('')
     $.xmlrpc(params).done(osSearchDone).fail(osSearchFail).always(osSearchAlways)

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Settings</title>
+  <link rel="stylesheet" type="text/css" href="vendor/chrome-bootstrap/chrome-bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="styles/settings/main.css" />
+</head>
+  <body class="chrome-bootstrap">
+
+    <div class="frame">
+      <div class="navigation">
+        <h1 id="title">Settings</h1>
+        <ul class="menu">
+          <li class="selected">
+            <a href="#settings">Settings</a>
+          </li>
+          <li>
+            <a href="#about">About</a>
+          </li>
+        </ul>
+      </div>
+      <div class="mainview view">
+
+        <div id="settings" class="selected">
+          <header>
+            <h1>Settings</h1>
+          </header>
+          <div class="content">
+            <h3>Translation</h3>
+            <div style="margin: 10px 20px;">
+              <p>Set what language pair will be used for word translation.</p>
+              <select id="translation-language">
+              </select>
+            </div>
+
+            <h3>Subtitles languages</h3>
+            <div style="margin: 10px 20px;">
+              <p>Check what languages will be used for subtitles search.</p>
+              <div id="subtitles-languages"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="about">
+          <header>
+            <h1>About</h1>
+          </header>
+          <div class="content">
+            <h3>Copyright (c) 2014 Denis Shemanaev</h3>
+            <div style="margin: 10px 20px;">
+              <p><a href="http://github.com/DeniSix/THIS_PROJECT/">Project page</a></p>
+              <p><a href="http://shemanaev.com/">My homepage</a></p>
+              <p><a href="mailto:denis@shemanaev.com">Email me</a></p>
+            </div>
+
+            <h3>Third party libraries</h3>
+            <div style="margin: 10px 20px;">
+              <p><a href="http://jquery.com/">jQuery</a></p>
+              <p><a href="https://github.com/timheap/jquery-xmlrpc">jQuery XML-RPC</a></p>
+              <p><a href="http://olado.github.io/doT/">doT</a></p>
+              <p><a href="https://github.com/imaya/zlib.js">zlib.js</a></p>
+              <p><a href="http://necolas.github.io/normalize.css/">normalize.css</a></p>
+              <p><a href="http://getbootstrap.com/">Bootstrap</a></p>
+              <p><a href="http://roykolak.github.com/chrome-bootstrap/">Chrome-Bootstrap</a></p>
+              <p><a href="https://flowplayer.org/">Flowplayer</a></p>
+            </div>
+
+            <h3>Third party services</h3>
+            <div style="margin: 10px 20px;">
+              <p><a href="http://opensubtitles.org/">OpenSubtitles.org</a></p>
+              <p><a href="http://api.yandex.com/dictionary/">Yandex.Dictionary</a></p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- templates -->
+    <script type="text/template" data-name="subtitles-language">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" value="{{!it.code}}" {{? it.checked}}checked{{?}}>
+          <span>{{!it.title}}</span>
+        </label>
+      </div>
+    </script>
+
+    <script type="text/template" data-name="translation-language">
+      <option value="{{!it.title}}" {{? it.selected}}selected{{?}}>{{!it.title}}</option>
+    </script>
+    <!-- /templates -->
+
+    <!-- vendor -->
+    <script src="vendor/doT/doT.min.js"></script>
+    <script src="vendor/jquery/jquery-1.11.0.min.js"></script>
+    <script src="vendor/jquery-xmlrpc/jquery.xmlrpc.js"></script>
+    <!-- /vendor -->
+    <script src="scripts/common/config.js"></script>
+    <script src="scripts/common/utils.js"></script>
+    <script src="scripts/common/vars.js"></script>
+    <script src="scripts/settings/vars.js"></script>
+    <script src="scripts/settings/chrome_view.js"></script>
+    <script src="scripts/settings/subtitles_langs.js"></script>
+    <script src="scripts/settings/translation_lang.js"></script>
+
+  </body>
+</html>

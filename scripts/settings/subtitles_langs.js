@@ -1,0 +1,39 @@
+
+$(function initSubtitlesLangs() {
+  if (!settingsLoaded) {
+    return setTimeout(initSubtitlesLangs.bind(this), 200)
+  }
+
+  $document.bind('change', '#subtitles-languages input[type=checkbox]', function (e) {
+    settings.subtitlesLangs = []
+    $('#subtitles-languages input[type=checkbox]:checked').each(function (i, el) {
+      var $el = $(el)
+      settings.subtitlesLangs.push($el.val())
+    })
+    chrome.storage.sync.set(settings)
+  })
+
+  function osLangsDone(response, status, jqXHR) {
+    var langs = response[0].data
+    for (var i = 0; i < langs.length; i++) {
+      var lang = langs[i]
+      var params =
+        { code: lang.SubLanguageID
+        , title: lang.LanguageName
+        , checked: settings.subtitlesLangs.indexOf(lang.SubLanguageID) !== -1
+        }
+      $subtitlesLangs.append(JST['subtitles-language'](params))
+    }
+  }
+
+  function osLangsFail(jqXHR, status, error) {
+    console.log('xmlrpc langs', error)
+  }
+
+  var params =
+    { url: OS_BASE
+    , methodName: 'GetSubLanguages'
+    , params: []
+    }
+  $.xmlrpc(params).done(osLangsDone).fail(osLangsFail)
+})

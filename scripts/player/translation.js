@@ -60,7 +60,7 @@ $(function () {
     }
     var args =
       { key: YANDEX_TRANSLATOR_KEY
-      , lang: 'en-ru'
+      , lang: settings.translationLang
       , text: text
       }
     var url = buildUrl(YANDEX_TRANSLATOR_BASE + 'lookup', args)

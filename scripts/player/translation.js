@@ -3,15 +3,24 @@ $(function () {
   // pause on mouse over subtitles
   var subSel = '.flowplayer .fp-subtitle.fp-active'
   var wordSel = '.flowplayer .fp-subtitle.fp-active p span'
-  var pauseTimer = null
-  var translationTimer = null
+  var timer = null
+  var paused = 0
+  var PNONE = 0
+  var PPAUSED = 1
+  var PUNPAUSED = 2
+
+  function hideTranslation() {
+    if (paused === PUNPAUSED) {
+      api.play()
+    }
+    paused = PNONE
+    $translation.hide()
+  }
 
   function scheduleHide(onlyClear) {
-    clearTimeout(pauseTimer)
-    clearTimeout(translationTimer)
+    clearTimeout(timer)
     if (onlyClear) return
-    pauseTimer = setTimeout(api.play.bind(api), 100)
-    translationTimer = setTimeout($translation.hide.bind($translation), 100)
+    timer = setTimeout(hideTranslation, 100)
   }
 
   // split replica by words
@@ -26,6 +35,9 @@ $(function () {
 
   // play/pause on hover subtitles are
   $document.on('mouseenter', subSel, function (e) {
+    if (paused === PNONE) {
+      paused = api.paused ? PPAUSED : PUNPAUSED
+    }
     scheduleHide(true)
     api.pause()
   })

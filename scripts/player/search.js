@@ -52,7 +52,13 @@ $(function () {
 
   function setupPlayer(sub) {
     $player.html(JST['player']({ src: urlParams['src'], type: urlParams['type'], sub: sub }))
-    $player.flowplayer({ swf: 'vendor/flowplayer/flowplayer.swf', tooltip: false })
+    // There is MUST be non-local swf as local version violates sandbox rules for ExternalInterface
+    // on chrome-extensions:// pages
+    // Another option (but it's for development only) is to add 'chrome-extension://' address
+    // to flash as trusted location at
+    // http://www.macromedia.com/support/documentation/en/flashplayer/help/settings_manager04.html
+    // (solution from https://code.google.com/p/chromium/issues/detail?id=42796#c10)
+    $player.flowplayer({ swf: 'https://releases.flowplayer.org/5.4.6/flowplayer.swf', tooltip: false })
     api = $player.data('flowplayer')
   }
 

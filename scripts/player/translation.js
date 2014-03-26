@@ -47,7 +47,7 @@ $(function () {
 
   // highlight hover word and show translation
   function translationAdjustPosition() {
-    $translation.css('top', $(subSel).offset().top - $translation.height() - 10)
+    $translation.css('top', $(subSel).offset().top - $translation.height() - 15)
     $translation.css('left', ($document.width() - $translation.width()) / 2)
   }
   function translationShow(text, translations) {

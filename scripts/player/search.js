@@ -60,6 +60,7 @@ $(function () {
     // (solution from https://code.google.com/p/chromium/issues/detail?id=42796#c10)
     $player.flowplayer({ swf: 'https://releases.flowplayer.org/5.4.6/flowplayer.swf', tooltip: false })
     api = $player.data('flowplayer')
+    $player.append($translation)
   }
 
   // run player on modal hide

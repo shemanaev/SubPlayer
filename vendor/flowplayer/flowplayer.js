@@ -2346,6 +2346,12 @@ flowplayer(function(player, root, engine) {
          else if (cue.subtitleEnd && time >= cue.time && cue.index == currentPoint + 1) player.trigger("cuepoint", cue);
       });
 
+   }).bind("fullscreen", function(e) {
+      wrap.css('font-size', screen.width / root[0].offsetWidth * 1.4 * 100 + '%');
+
+   }).bind("fullscreen-exit", function(e) {
+      wrap.css('fontSize', '');
+
    });
 
 });

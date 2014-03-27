@@ -10,6 +10,11 @@
   border: none;
 }
 
+/* Hide cursor in fullscreen */
+.flowplayer.is-mouseout .fp-ui {
+  cursor: none;
+}
+
 .flowplayer .fp-subtitle.fp-active p {
   font-size: 1.8em;
   background: rgba(0, 0, 0, 0.0001);

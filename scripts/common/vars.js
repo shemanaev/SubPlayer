@@ -7,6 +7,7 @@ var settings =
     [ 'eng'
     , 'rus'
     ]
+  , subtitlesBestMatch: true
   }
 var $document
 var $body

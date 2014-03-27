@@ -19,8 +19,10 @@ $(function () {
       if (subs) {
         for (var i = 0; i < subs.length; i++) {
           var sub = subs[i]
-          if (sub.SubLanguageID in langs) continue
-          langs[sub.SubLanguageID] = true
+          if (settings.subtitlesBestMatch) {
+            if (sub.SubLanguageID in langs) continue
+            langs[sub.SubLanguageID] = true
+          }
           $subSelector.append(JST['subtitles-item']({ uri: sub.SubDownloadLink, title: sub.SubFileName, lang: sub.SubLanguageID }))
         }
       } else {

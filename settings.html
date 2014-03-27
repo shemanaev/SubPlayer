@@ -36,7 +36,13 @@
 
             <h3>Subtitles languages</h3>
             <div style="margin: 10px 20px;">
-              <p>Check what languages will be used for subtitles search.</p>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" id="subtitles-best-match" value="{{!it.code}}" {{? it.checked}}checked{{?}}>
+                  <span>Show best match only</span>
+                </label>
+              </div>
+              <p>Mark what languages will be used for subtitles search.</p>
               <div id="subtitles-languages"></div>
             </div>
           </div>

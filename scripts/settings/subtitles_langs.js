@@ -4,6 +4,12 @@ $(function initSubtitlesLangs() {
     return setTimeout(initSubtitlesLangs.bind(this), 200)
   }
 
+  $subtitlesBestMatch.bind('change', function (e) {
+    settings.subtitlesBestMatch = this.checked
+    chrome.storage.sync.set(settings)
+  })
+  $subtitlesBestMatch.prop('checked', settings.subtitlesBestMatch)
+
   $document.bind('change', '#subtitles-languages input[type=checkbox]', function (e) {
     settings.subtitlesLangs = []
     $('#subtitles-languages input[type=checkbox]:checked').each(function (i, el) {

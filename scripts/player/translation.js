@@ -46,28 +46,28 @@ $(function () {
   })
 
   // highlight hover word and show translation
-  function translationAdjustPosition() {
-    $translation.css('top', $(subSel).offset().top - $translation.height() - 15)
-    $translation.css('left', ($document.width() - $translation.width()) / 2)
+  function translationAdjustPosition(elem) {
+    $translation.css('top', elem.offset().top - $translation.height() - 20)
+    $translation.css('left', elem.offset().left)
   }
-  function translationShow(text, translations) {
+  function translationShow(elem, text, translations) {
     $translationContent.html(JST['translation']({ original: text, translations: translations.def }))
     $translationSpinner.hide()
-    translationAdjustPosition()
+    translationAdjustPosition(elem)
   }
-  function translationShowLoading() {
+  function translationShowLoading(elem) {
     $translationContent.html('')
     $translation.show()
     $translationSpinner.show()
-    translationAdjustPosition()
+    translationAdjustPosition(elem)
   }
   $document.on('mouseenter', wordSel, function (e) {
     var t = $(this)
     t.addClass('word-over')
-    translationShowLoading()
+    translationShowLoading(t)
     var text = t.html()
     if (text in transCache) {
-      translationShow(text, transCache[text])
+      translationShow(t, text, transCache[text])
       return
     }
     var args =
@@ -78,7 +78,7 @@ $(function () {
     var url = buildUrl(YANDEX_TRANSLATOR_BASE + 'lookup', args)
     $.get(url, function (res) {
       transCache[text] = res
-      translationShow(text, res)
+      translationShow(t, text, res)
     })
   })
   $document.on('mouseleave', wordSel, function (e) {

@@ -1,6 +1,6 @@
 /*!
 
-   Flowplayer v5.4.6 (2014-03-26) | flowplayer.org/license
+   Flowplayer v5.4.6 (2014-03-27) | flowplayer.org/license
 
 */
 !function($) { 
@@ -2262,7 +2262,7 @@ flowplayer(function(player, root, engine) {
 
    function parseSubtitles(txt) {
 
-      for (var i = 0, lines = txt.split("\n"), len = lines.length, entry = {}, title, timecode, text, cue; i < len; i++) {
+      for (var i = 0, lines = txt.split("\n"), len = lines.length, entry = {}, title, nextTitle, line, timecode, text, cue; i < len; i++) {
 
          timecode = TIMECODE_RE.exec(lines[i]);
 
@@ -2271,9 +2271,12 @@ flowplayer(function(player, root, engine) {
             // title
             title = lines[i - 1];
 
+            // next item's title
+            nextTitle = parseInt(title) + 1;
+
             // text
             text = "<p>" + lines[++i] + "</p><br/>";
-            while ($.trim(lines[++i]) && i < lines.length) text +=  "<p>" + lines[i] + "</p><br/>";
+            while (line = lines[++i] && $.trim(line) && nextTitle != line && i < lines.length) text +=  "<p>" + lines[i] + "</p><br/>";
 
             // entry
             entry = {

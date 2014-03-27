@@ -13,6 +13,18 @@ $(function initMain() {
     return true
   })
 
+  $window.resize(function (e) {
+    var w = $window.width()
+    var h = $window.height()
+
+    if (w >= h) {
+      $player.height(h + 'px')
+    } else {
+      $player.width(w + 'px')
+    }
+    $player.css('margin-left', ($window.width() - $player.width()) / 2 + 'px')
+  })
+
   // open subtitles search dialog
   $subQuery.val(urlParams['title'])
   $subGo.click()

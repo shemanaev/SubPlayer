@@ -53,11 +53,6 @@ body {
   text-align: left;
 }
 
-.player {
-  width: 90%;
-  margin: 2% 5%;
-}
-
 .word-over {
   background-color: rgba(255, 200, 0, 0.6);
 }

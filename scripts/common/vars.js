@@ -10,6 +10,7 @@ var settings =
   , subtitlesBestMatch: true
   }
 var $document
+var $window
 var $body
 
 $(function () {
@@ -26,5 +27,6 @@ $(function () {
   })
 
   $document = $(document)
+  $window = $(window)
   $body = $('body')
 })

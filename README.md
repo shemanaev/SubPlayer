@@ -1,12 +1,22 @@
+# SubPlayer
+
+Chrome extension for watching (almost) any online video with external subtitles.
 
 ## ToDo
 
-- Add settings for tranlation languages
-- Settings for opensubtitles.org query languages
 - Settings for subtitles:
   - size
   - position
   - transparency ?
   - color
-  - time shift
-- Consider to use [video.js](https://github.com/videojs/video.js)
+  - time shift (in secs)
+- Register OS.org UA
+- Add API keys into git?
+
+## Known bugs / won't fix
+
+- One letter words in subtitles can't be selected
+
+## License
+
+MIT

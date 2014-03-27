@@ -67,8 +67,12 @@ body {
   color: #fff;
 }
 
-.translation > ul {
-  margin-left: -20px;
+.translation ul {
+  margin-left: 15px;
+}
+
+.translation ul > li  {
+  list-style-type: square;
 }
 
 .translation .original {

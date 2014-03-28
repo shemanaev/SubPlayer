@@ -3,6 +3,7 @@
  * Build URL query from arguments object
  */
 function buildUrl(base, args) {
+  'use strict';
   var s = base + '?'
   for (var arg in args) {
     s += encodeURIComponent(arg) + '=' + encodeURIComponent(args[arg]) + '&'
@@ -14,6 +15,7 @@ function buildUrl(base, args) {
  * Stupid URL parser
  */
 function parseUrl(url) {
+  'use strict';
   var a = document.createElement('a')
   a.href = url
   return a
@@ -21,8 +23,9 @@ function parseUrl(url) {
 
 
 function getBinary(url, callback, error) {
+  'use strict';
   function onLoadHandler(event) {
-    if (this.status == 200) {
+    if (this.status === 200) {
       var array = new Uint8Array(this.response)
       callback(array)
     } else {
@@ -51,6 +54,7 @@ function getBinary(url, callback, error) {
  * @param {Function} callback The function to call when conversion is complete
  */
 function _arrayBufferToString(buf, callback) {
+  'use strict';
   var bb = new Blob([new Uint8Array(buf)])
   var f = new FileReader()
   f.onload = function(e) {

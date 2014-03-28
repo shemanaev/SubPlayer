@@ -1,4 +1,7 @@
-
+/*global
+  chrome,
+  doT,
+*/
 var JST = {} // JS templates
 var settingsLoaded = false
 var settings =
@@ -14,6 +17,7 @@ var $window
 var $body
 
 $(function () {
+  'use strict';
   // load settings
   chrome.storage.sync.get(settings, function(items) {
     settings = items

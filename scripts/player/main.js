@@ -1,5 +1,17 @@
-
+/*global
+  EXTENSION_NAME,
+  api,
+  settingsLoaded,
+  urlParams,
+  $document,
+  $window,
+  $player,
+  $subQuery,
+  $subModal,
+  $subGo,
+*/
 $(function initMain() {
+  'use strict';
   if (!settingsLoaded) {
     return setTimeout(initMain.bind(this), 200)
   }
@@ -26,7 +38,7 @@ $(function initMain() {
   })
 
   // open subtitles search dialog
-  $subQuery.val(urlParams['title'])
+  $subQuery.val(urlParams.title)
   $subGo.click()
   $subModal.modal()
 })

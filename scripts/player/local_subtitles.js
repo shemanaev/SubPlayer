@@ -1,5 +1,14 @@
-
+/*global
+  EXTENSION_NAME,
+  JST,
+  $body,
+  $document,
+  $dropZone,
+  $subSelector,
+  $subModal,
+*/
 $(function () {
+  'use strict';
   // Subtitles drag&drop
   var dropTimeout = null
   function dragOver(e) {

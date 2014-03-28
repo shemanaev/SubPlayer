@@ -1,10 +1,17 @@
-
+/*global
+  chrome,
+  buildUrl,
+  parseUrl,
+  titleExtractor,
+  OS_USER_AGENT,
+*/
 var videos = {} // All captured videos
 
 /**
  * Open player page on browserAcrion button click
  */
 function openPlayer(tab) {
+  'use strict';
   var video = videos[tab.id]
   if (!video) return
 
@@ -24,6 +31,7 @@ function openPlayer(tab) {
  * Fires on tab closed
  */
 function tabClosed(tabId) {
+  'use strict';
   delete videos[tabId]
 }
 
@@ -31,6 +39,7 @@ function tabClosed(tabId) {
  * Check that it's video Content-Type
  */
 function isVideo(type) {
+  'use strict';
   var VIDEO_TYPE = 'video/'
 
   if (type.substr(0, VIDEO_TYPE.length) === VIDEO_TYPE) {
@@ -43,6 +52,7 @@ function isVideo(type) {
  * Callback on Chrome received headers
  */
 function headersReceived(e) {
+  'use strict';
   var CONTENT_TYPE = 'content-type'
   var h = e.responseHeaders
   var tabId = e.tabId
@@ -62,11 +72,12 @@ function headersReceived(e) {
  * Replace the User-Agent header for opensubtitles.org
  */
 function openSubtitlesUA(e) {
+  'use strict';
   var USER_AGENT = 'user-agent'
   var h = e.requestHeaders
   for (var i = 0; i < h.length; i++) {
     var t = h[i]
-    if (t.name.toLowerCase() == 'user-agent') {
+    if (t.name.toLowerCase() === 'user-agent') {
       t.value = OS_USER_AGENT
       break
     }

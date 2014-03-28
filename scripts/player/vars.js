@@ -1,4 +1,8 @@
-
+/*global
+  EXTENSION_NAME,
+  OS_BASE,
+  OS_USER_AGENT,
+*/
 var urlParams = {} // url parameters
 var $player
 var $translation
@@ -11,10 +15,10 @@ var $subQuery
 var $subSelector
 var $subSpinner
 var api // flowplayer API
-var transCache = {} // tranlations cache
 var osToken = null // opensubtitles.org API token
 
 $(function () {
+  'use strict';
   // Log in to opensubtitles.org
   function osLoginDone(response, status, jqXHR) {
     osToken = response[0].token
@@ -54,5 +58,5 @@ $(function () {
   $subSpinner = $('#subtitles-spinner')
 
   // assign page title
-  document.title = urlParams['title'] + ' | ' + EXTENSION_NAME
+  document.title = urlParams.title + ' | ' + EXTENSION_NAME
 })

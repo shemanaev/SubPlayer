@@ -1,5 +1,15 @@
-
+/*global
+  chrome,
+  buildUrl,
+  JST,
+  settings,
+  settingsLoaded,
+  $translationLang,
+  YANDEX_TRANSLATOR_BASE,
+  YANDEX_TRANSLATOR_KEY,
+*/
 $(function initTranslationLang() {
+  'use strict';
   if (!settingsLoaded) {
     return setTimeout(initTranslationLang.bind(this), 200)
   }

@@ -1,5 +1,24 @@
-
+/*global
+  JST,
+  api: true,
+  OS_BASE,
+  settings,
+  urlParams,
+  osToken,
+  getBinary,
+  _arrayBufferToString,
+  Zlib,
+  $window,
+  $subSelector,
+  $subSpinner,
+  $subQuery,
+  $subModal,
+  $subGo,
+  $player,
+  $translation,
+*/
 $(function () {
+  'use strict';
   $subQuery.bind('keyup', function (e) {
     if (event.which === 13) {
       $subGo.click()
@@ -53,7 +72,7 @@ $(function () {
   $subGo.bind('click', findSubtitlesClick)
 
   function setupPlayer(sub) {
-    $player.html(JST['player']({ src: urlParams['src'], type: urlParams['type'], sub: sub }))
+    $player.html(JST.player({ src: urlParams.src, type: urlParams.type, sub: sub }))
     // There is MUST be non-local swf as local version violates sandbox rules for ExternalInterface
     // on chrome-extensions:// pages
     // Another option (but it's for development only) is to add 'chrome-extension://' address
@@ -72,7 +91,7 @@ $(function () {
     var sub = $('input[name=subtitles]:checked').val()
     if (sub && HTTP_PROTO === sub.substr(0, HTTP_PROTO.length)) {
       // fetch subtitles
-      function getSubsDone(response) {
+      var getSubsDone = function (response) {
         var gunzip = new Zlib.Gunzip(response)
         var plain = gunzip.decompress()
         _arrayBufferToString(plain, function (text) {
@@ -80,7 +99,7 @@ $(function () {
         })
       }
 
-      function getSubsFail(error) {
+      var getSubsFail = function (error) {
         // TODO: display error
         console.log('getSubsFail', error)
       }

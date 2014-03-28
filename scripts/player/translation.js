@@ -1,5 +1,17 @@
-
+/*global
+  JST,
+  api,
+  settings,
+  buildUrl,
+  YANDEX_TRANSLATOR_KEY,
+  YANDEX_TRANSLATOR_BASE,
+  $document,
+  $translation,
+  $translationContent,
+  $translationSpinner,
+*/
 $(function () {
+  'use strict';
   // pause on mouse over subtitles
   var subSel = '.flowplayer .fp-subtitle.fp-active'
   var wordSel = '.flowplayer .fp-subtitle.fp-active p span'
@@ -8,6 +20,7 @@ $(function () {
   var PNONE = 0
   var PPAUSED = 1
   var PUNPAUSED = 2
+  var transCache = {} // tranlations cache
 
   function hideTranslation() {
     if (paused === PUNPAUSED) {
@@ -51,7 +64,7 @@ $(function () {
     $translation.css('left', elem.offset().left)
   }
   function translationShow(elem, text, translations) {
-    $translationContent.html(JST['translation']({ original: text, translations: translations.def }))
+    $translationContent.html(JST.translation({ original: text, translations: translations.def }))
     $translationSpinner.hide()
     translationAdjustPosition(elem)
   }

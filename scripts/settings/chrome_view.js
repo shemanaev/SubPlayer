@@ -1,5 +1,8 @@
-
+/*global
+  $body,
+*/
 $(function () {
+  'use strict';
   $('.menu a').click(function(ev) {
     ev.preventDefault()
     var selected = 'selected'

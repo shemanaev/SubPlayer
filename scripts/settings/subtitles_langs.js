@@ -1,5 +1,15 @@
-
+/*global
+  chrome,
+  JST,
+  settings,
+  settingsLoaded,
+  OS_BASE,
+  $document,
+  $subtitlesLangs,
+  $subtitlesBestMatch,
+*/
 $(function initSubtitlesLangs() {
+  'use strict';
   if (!settingsLoaded) {
     return setTimeout(initSubtitlesLangs.bind(this), 200)
   }

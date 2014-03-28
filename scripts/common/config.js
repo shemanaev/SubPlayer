@@ -4,3 +4,6 @@ var YANDEX_TRANSLATOR_BASE = 'https://dictionary.yandex.net/api/v1/dicservice.js
 var YANDEX_TRANSLATOR_KEY = 'KEY_HERE'
 var OS_BASE = 'http://api.opensubtitles.org/xml-rpc'
 var OS_USER_AGENT = 'OS Test User Agent'
+
+var SUB_POSITION_MAX = 7
+var SUB_POSITION_OFFSET = 7

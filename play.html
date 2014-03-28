@@ -71,12 +71,80 @@
       </div>
     </div>
 
+    <div class="modal fade" id="subtitles-settings-modal" tabindex="-1" role="dialog" data-backdrop="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Subtitles settings</h4>
+          </div>
+          <div class="modal-body text-center">
+
+            <div class="row">
+              <div class="col-md-4">
+                <span>Size</span>
+              </div>
+              <div class="col-md-4">
+                <span>Position</span>
+              </div>
+              <div class="col-md-4">
+                <span>Time shift</span>
+              </div>
+            </div>
+
+            <div class="row">
+
+              <div class="col-md-4">
+                <div class="input-group">
+                  <span class="input-group-btn">
+                    <a id="player-settings-size-minus" class="btn btn-default" role="button"><span class="glyphicon glyphicon-minus"></span></a>
+                  </span>
+                  <input id="player-settings-size" type="text" class="form-control text-center" readonly>
+                  <span class="input-group-btn">
+                    <a id="player-settings-size-plus" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span></a>
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="input-group">
+                  <span class="input-group-btn">
+                    <a id="player-settings-position-down" class="btn btn-default" role="button"><span class="glyphicon glyphicon-chevron-down"></span></a>
+                  </span>
+                  <input id="player-settings-position" type="text" class="form-control text-center" readonly>
+                  <span class="input-group-btn">
+                    <a id="player-settings-position-up" class="btn btn-default" role="button"><span class="glyphicon glyphicon-chevron-up"></span></a>
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="input-group">
+                  <span class="input-group-btn">
+                    <a id="player-settings-shift-back" class="btn btn-default" role="button"><span class="glyphicon glyphicon-backward"></span></a>
+                  </span>
+                  <input id="player-settings-shift" type="text" class="form-control text-center" readonly>
+                  <span class="input-group-btn">
+                    <a id="player-settings-shift-forward" class="btn btn-default" role="button"><span class="glyphicon glyphicon-forward"></span></a>
+                  </span>
+                </div>
+              </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- templates -->
     <script type="text/template" data-name="player">
       <video id="player1" autoplay>
         <source type="{{!it.type}}" src="{{!it.src}}">
         <track kind="subtitles" contents="{{!it.sub}}" label="subtitles on" default>
       </video>
+      <span id="player-settings-button" class="glyphicon glyphicon-cog player-settings"></span>
     </script>
 
     <script type="text/template" data-name="subtitles-item">
@@ -118,6 +186,7 @@
     <script src="scripts/player/local_subtitles.js"></script>
     <script src="scripts/player/search.js"></script>
     <script src="scripts/player/translation.js"></script>
+    <script src="scripts/player/player_settings.js"></script>
     <script src="scripts/player/main.js"></script>
 
   </body>

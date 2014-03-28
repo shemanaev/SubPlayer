@@ -11,6 +11,8 @@ var settings =
     , 'rus'
     ]
   , subtitlesBestMatch: true
+  , subtitlesSize: 100
+  , subtitlesPosition: 0
   }
 var $document
 var $window

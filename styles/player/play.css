@@ -94,3 +94,23 @@ body {
 #subtitles-spinner {
   margin-left: 49%;
 }
+
+.player-settings {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: block;
+  width: 25px;
+  height: 20px;
+  z-index: 999999;
+  cursor: pointer;
+}
+
+.flowplayer.is-mouseout .player-settings {
+  opacity: 0;
+  transition: opacity .15s .3s
+}
+
+.player-settings.glyphicon {
+  color: #fff;
+}

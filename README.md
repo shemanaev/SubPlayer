@@ -4,12 +4,6 @@ Chrome extension for watching (almost) any online video with external subtitles.
 
 ## ToDo
 
-- Settings for subtitles:
-  - size
-  - position
-  - transparency ?
-  - color
-  - time shift (in secs)
 - Register OS.org UA
 - Add API keys into git?
 

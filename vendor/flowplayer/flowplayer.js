@@ -2250,7 +2250,7 @@ flowplayer(function(player, root, engine) {
    // avoid duplicate loads
    track.remove();
 
-   var TIMECODE_RE = /^(([0-9]{2}:)?[0-9]{2}:[0-9]{2}[,.]{1}[0-9]{3}) --\> (([0-9]{2}:)?[0-9]{2}:[0-9]{2}[,.]{1}[0-9]{3})(.*)/;
+   var TIMECODE_RE = /^([0-9]{2}:[0-9]{2}:[0-9]{2}[,.]{1}[0-9]{3}) --\> ([0-9]{2}:[0-9]{2}:[0-9]{2}[,.]{1}[0-9]{3})(.*)/;
 
    function seconds(timecode) {
       var els = timecode.split(':');
@@ -2276,7 +2276,7 @@ flowplayer(function(player, root, engine) {
 
             // text
             text = "<p>" + lines[++i] + "</p><br/>";
-            while (line = lines[++i] && $.trim(line) && nextTitle != line && i < lines.length) text +=  "<p>" + lines[i] + "</p><br/>";
+            while ((line = lines[++i]) && $.trim(line) && nextTitle != line.split(' ')[0] && i < lines.length) text +=  "<p>" + line + "</p><br/>";
 
             // entry
             entry = {

@@ -15,6 +15,7 @@
     , "scripts/common/config.js"
     , "scripts/background/title_extractor.js"
     , "scripts/background/extractors/brb.to.js"
+    , "scripts/background/extractors/ex.ua.js"
     , "scripts/background/background.js"
     ]
   }

@@ -15,7 +15,14 @@ TitleExtractor.prototype.register = function (domain, callback) {
 TitleExtractor.prototype.extract = function (domain, text) {
   'use strict';
   var res = text
-  if (domain in this.extractors) res = this.extractors[domain](text)
+  var extractor
+  for (var e in this.extractors) {
+    if (domain.indexOf(e) !== -1) {
+      extractor = this.extractors[e]
+      break
+    }
+  }
+  if (extractor) res = extractor(text)
   return res
 }
 

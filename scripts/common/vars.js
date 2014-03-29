@@ -14,6 +14,7 @@ var settings =
   , subtitlesSize: 100
   , subtitlesPosition: 0
   , subtitlesOpacity: 0
+  , newTab: false
   }
 var $document
 var $window

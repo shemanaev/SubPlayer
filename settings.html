@@ -27,6 +27,16 @@
             <h1>Settings</h1>
           </header>
           <div class="content">
+            <h3>General</h3>
+            <div style="margin: 10px 20px;">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" id="open-new-tab">
+                  <span>Open player in new tab</span>
+                </label>
+              </div>
+            </div>
+
             <h3>Translation</h3>
             <div style="margin: 10px 20px;">
               <p>Set what language pair will be used for word translation.</p>
@@ -38,7 +48,7 @@
             <div style="margin: 10px 20px;">
               <div class="checkbox">
                 <label>
-                  <input type="checkbox" id="subtitles-best-match" value="{{!it.code}}" {{? it.checked}}checked{{?}}>
+                  <input type="checkbox" id="subtitles-best-match">
                   <span>Show best match only</span>
                 </label>
               </div>
@@ -111,6 +121,7 @@
     <script src="scripts/settings/chrome_view.js"></script>
     <script src="scripts/settings/subtitles_langs.js"></script>
     <script src="scripts/settings/translation_lang.js"></script>
+    <script src="scripts/settings/general.js"></script>
 
   </body>
 </html>

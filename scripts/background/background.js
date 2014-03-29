@@ -24,7 +24,14 @@ function openPlayer(tab) {
     }
   var url = buildUrl(chrome.extension.getURL('play.html'), args)
 
-  chrome.tabs.create({url: url})
+  chrome.storage.sync.get({ newTab: false }, function (settings) {
+    if (settings.newTab) {
+      chrome.tabs.create({url: url})
+    } else {
+      chrome.tabs.update(tab.id, { url: url })
+    }
+  })
+
 }
 
 /**

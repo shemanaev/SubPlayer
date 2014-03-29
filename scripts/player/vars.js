@@ -17,6 +17,7 @@ var $subSpinner
 var $subSettingsModal
 var api // flowplayer API
 var osToken = null // opensubtitles.org API token
+var localSubtitles
 
 $(function () {
   'use strict';

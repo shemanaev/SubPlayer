@@ -5,8 +5,10 @@
   settings,
   urlParams,
   osToken,
+  localSubtitles,
   getBinary,
   _arrayBufferToString,
+  fixEncoding,
   Zlib,
   $window,
   $subSelector,
@@ -72,7 +74,7 @@ $(function () {
   $subGo.bind('click', findSubtitlesClick)
 
   function setupPlayer(sub) {
-    $player.html(JST.player({ src: urlParams.src, type: urlParams.type, sub: sub }))
+    $player.html(JST.player({ src: urlParams.src, type: urlParams.type, sub: fixEncoding(sub) }))
     // There is MUST be non-local swf as local version violates sandbox rules for ExternalInterface
     // on chrome-extensions:// pages
     // Another option (but it's for development only) is to add 'chrome-extension://' address
@@ -89,14 +91,14 @@ $(function () {
   $subModal.on('hide.bs.modal', function (e) {
     var HTTP_PROTO = 'http'
     var sub = $('input[name=subtitles]:checked').val()
-    if (sub && HTTP_PROTO === sub.substr(0, HTTP_PROTO.length)) {
+    if (sub === 'local') {
+      setupPlayer(localSubtitles)
+    } else if (sub && HTTP_PROTO === sub.substr(0, HTTP_PROTO.length)) {
       // fetch subtitles
       var getSubsDone = function (response) {
         var gunzip = new Zlib.Gunzip(response)
         var plain = gunzip.decompress()
-        _arrayBufferToString(plain, function (text) {
-          setupPlayer(text)
-        })
+        setupPlayer(plain)
       }
 
       var getSubsFail = function (error) {
@@ -106,7 +108,7 @@ $(function () {
 
       getBinary(sub, getSubsDone, getSubsFail)
     } else {
-      setupPlayer(sub)
+      setupPlayer()
     }
   })
 

@@ -1,6 +1,7 @@
 /*global
   EXTENSION_NAME,
   JST,
+  localSubtitles: true,
   $body,
   $document,
   $dropZone,
@@ -24,8 +25,8 @@ $(function () {
   function fileRead(file) {
     var reader = new FileReader()
     reader.onload = function(event) {
-      var dataUri = 'data:' + event.target.result
-      $subSelector.append(JST['subtitles-item']({ uri: dataUri, title: file.name }))
+      localSubtitles = new Uint8Array(event.target.result)
+      $subSelector.append(JST['subtitles-item']({ uri: 'local', title: file.name }))
       $('input:radio[name=subtitles]:last').prop('checked', true)
       $subModal.modal('hide')
     }
@@ -34,7 +35,7 @@ $(function () {
       console.error('Error reading file:', event.target.error.code)
     }
 
-    reader.readAsText(file)
+    reader.readAsArrayBuffer(file)
   }
 
   function fileDrop(e) {

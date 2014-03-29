@@ -2316,8 +2316,6 @@ flowplayer(function(player, root, engine) {
             return false;
          });
       });
-   } else {
-      return;
    }
 
    var wrap = $("<div class='fp-subtitle'/>").appendTo(root),

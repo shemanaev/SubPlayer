@@ -7,6 +7,7 @@
   $dropZone,
   $subSelector,
   $subModal,
+  $subSelectBtn,
 */
 $(function () {
   'use strict';
@@ -27,8 +28,10 @@ $(function () {
     reader.onload = function(event) {
       localSubtitles = new Uint8Array(event.target.result)
       $subSelector.append(JST['subtitles-item']({ uri: 'local', title: file.name }))
-      $('input:radio[name=subtitles]:last').prop('checked', true)
-      $subModal.modal('hide')
+      var el = $('input:radio[name=subtitles]:last')
+      el.prop('checked', true)
+      el.parent().addClass('active')
+      $subSelectBtn.click()
     }
 
     reader.onerror = function(event) {

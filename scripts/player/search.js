@@ -16,6 +16,7 @@
   $subQuery,
   $subModal,
   $subGo,
+  $subSelectBtn,
   $player,
   $translation,
 */
@@ -93,7 +94,7 @@ $(function () {
   }
 
   // run player on modal hide
-  $subModal.on('hide.bs.modal', function (e) {
+  $subSelectBtn.click(function (e) {
     var HTTP_PROTO = 'http'
     var sub = $('input[name=subtitles]:checked').val()
     if (sub === 'local') {
@@ -115,6 +116,10 @@ $(function () {
     } else {
       setupPlayer()
     }
+  })
+
+  $subModal.on('hide.bs.modal', function (e) {
+    if (!api) setupPlayer()
   })
 
   $subModal.on('shown.bs.modal', function (e) {

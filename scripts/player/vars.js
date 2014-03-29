@@ -15,6 +15,7 @@ var $subQuery
 var $subSelector
 var $subSpinner
 var $subSettingsModal
+var $subSelectBtn
 var api // flowplayer API
 var osToken = null // opensubtitles.org API token
 var localSubtitles
@@ -59,6 +60,7 @@ $(function () {
   $subSelector = $('#subtitles-selector')
   $subSpinner = $('#subtitles-spinner')
   $subSettingsModal = $('#subtitles-settings-modal')
+  $subSelectBtn = $('#sutitles-select-button')
 
   // assign page title
   document.title = urlParams.title + ' | ' + EXTENSION_NAME

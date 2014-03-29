@@ -13,6 +13,7 @@ var settings =
   , subtitlesBestMatch: true
   , subtitlesSize: 100
   , subtitlesPosition: 0
+  , subtitlesOpacity: 0
   }
 var $document
 var $window

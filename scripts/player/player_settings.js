@@ -33,6 +33,7 @@ $(function playerSettingsInit() {
   // Adjust subtitles settings
   var $playerSettingsSize = $('#player-settings-size')
   var $playerSettingsPosition = $('#player-settings-position')
+  var $playerSettingsBackground = $('#player-settings-background')
   var $playerSettingsShift = $('#player-settings-shift')
   var $subHolder = $('.fp-subtitle')
   var defaultBottom = parseInt($subHolder.css('bottom'))
@@ -40,9 +41,11 @@ $(function playerSettingsInit() {
 
   $subHolder.css('font-size', settings.subtitlesSize + '%')
   $subHolder.css('bottom', defaultBottom + settings.subtitlesPosition * SUB_POSITION_OFFSET + 'px')
+  $subHolder.css('background-color', 'rgba(0,0,0,' + (settings.subtitlesOpacity / 100) + ')')
 
   $playerSettingsSize.val(settings.subtitlesSize + '%')
   $playerSettingsPosition.val(settings.subtitlesPosition)
+  $playerSettingsBackground.val(settings.subtitlesOpacity)
   $playerSettingsShift.val(shift)
 
   // Resize on fullscreen
@@ -95,6 +98,29 @@ $(function playerSettingsInit() {
 
   $('#player-settings-position-up').click(function (event) {
     return adjustPosition(true)
+  })
+
+  // Background
+  function adjustBackgroundOpacity(plus) {
+    if (plus) {
+      if (settings.subtitlesOpacity < 100) settings.subtitlesOpacity += 10
+    } else {
+      if (settings.subtitlesOpacity > 0) settings.subtitlesOpacity -= 10
+    }
+    $playerSettingsBackground.val(settings.subtitlesOpacity)
+    var val = 'rgba(0,0,0,' + (settings.subtitlesOpacity / 100) + ')'
+    $subHolder.css('background-color', val)
+    chrome.storage.sync.set(settings)
+
+    return false
+  }
+
+  $('#player-settings-background-minus').click(function (event) {
+    return adjustBackgroundOpacity(false)
+  })
+
+  $('#player-settings-background-plus').click(function (event) {
+    return adjustBackgroundOpacity(true)
   })
 
   // Time shift

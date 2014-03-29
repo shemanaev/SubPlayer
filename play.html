@@ -72,7 +72,7 @@
     </div>
 
     <div class="modal fade" id="subtitles-settings-modal" tabindex="-1" role="dialog" data-backdrop="false">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -81,20 +81,23 @@
           <div class="modal-body text-center">
 
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <span>Size</span>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <span>Position</span>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
+                <span>Background</span>
+              </div>
+              <div class="col-md-3">
                 <span>Time shift</span>
               </div>
             </div>
 
             <div class="row">
 
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="input-group">
                   <span class="input-group-btn">
                     <a id="player-settings-size-minus" class="btn btn-default" role="button"><span class="glyphicon glyphicon-minus"></span></a>
@@ -106,7 +109,7 @@
                 </div>
               </div>
 
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="input-group">
                   <span class="input-group-btn">
                     <a id="player-settings-position-down" class="btn btn-default" role="button"><span class="glyphicon glyphicon-chevron-down"></span></a>
@@ -118,7 +121,19 @@
                 </div>
               </div>
 
-              <div class="col-md-4">
+              <div class="col-md-3">
+                <div class="input-group">
+                  <span class="input-group-btn">
+                    <a id="player-settings-background-minus" class="btn btn-default" role="button"><span class="glyphicon glyphicon-minus"></span></a>
+                  </span>
+                  <input id="player-settings-background" type="text" class="form-control text-center" readonly>
+                  <span class="input-group-btn">
+                    <a id="player-settings-background-plus" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span></a>
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-md-3">
                 <div class="input-group">
                   <span class="input-group-btn">
                     <a id="player-settings-shift-back" class="btn btn-default" role="button"><span class="glyphicon glyphicon-backward"></span></a>

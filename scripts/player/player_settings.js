@@ -4,6 +4,7 @@
   settings,
   $document,
   $player,
+  $subModal,
   $subSettingsModal,
   SUB_POSITION_MAX,
   SUB_POSITION_OFFSET,
@@ -13,6 +14,11 @@ $(function () {
 
   $document.on('click', '#player-settings-button', function (event) {
     $subSettingsModal.modal()
+    return false
+  })
+
+  $document.on('click', '#player-subtitles-button', function (event) {
+    $subModal.modal()
     return false
   })
 })

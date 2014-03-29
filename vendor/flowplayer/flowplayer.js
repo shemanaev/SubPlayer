@@ -2357,6 +2357,13 @@ flowplayer(function(player, root, engine) {
 
    });
 
+   player.loadSubtitles = function(contents) {
+      player.subtitles = [];
+      player.cuepoints = [];
+      parseSubtitles(contents);
+      return player;
+   };
+
 });
 
 

@@ -74,7 +74,12 @@ $(function () {
   $subGo.bind('click', findSubtitlesClick)
 
   function setupPlayer(sub) {
-    $player.html(JST.player({ src: urlParams.src, type: urlParams.type, sub: fixEncoding(sub) }))
+    sub = fixEncoding(sub)
+    if (api) {
+      api.loadSubtitles(sub)
+      return
+    }
+    $player.html(JST.player({ src: urlParams.src, type: urlParams.type, sub: sub }))
     // There is MUST be non-local swf as local version violates sandbox rules for ExternalInterface
     // on chrome-extensions:// pages
     // Another option (but it's for development only) is to add 'chrome-extension://' address

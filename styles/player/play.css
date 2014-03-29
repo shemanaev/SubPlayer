@@ -106,11 +106,22 @@ body {
   cursor: pointer;
 }
 
-.flowplayer.is-mouseout .player-settings {
+.player-subtitles {
+  position: absolute;
+  top: 12px;
+  left: 37px;
+  display: block;
+  width: 25px;
+  height: 20px;
+  z-index: 999999;
+  cursor: pointer;
+}
+
+.flowplayer.is-mouseout .player-ui {
   opacity: 0;
   transition: opacity .15s .3s
 }
 
-.player-settings.glyphicon {
+.flowplayer .glyphicon {
   color: #fff;
 }

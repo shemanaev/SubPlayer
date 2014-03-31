@@ -34,6 +34,14 @@ $(function () {
     JST[t.data('name')] = doT.template(t.html())
   })
 
+  // Setup PNotify
+  $.pnotify.defaults.styling = 'bootstrap3'
+  $.pnotify.defaults.type = 'error'
+  $.pnotify.defaults.hide = false
+  $.pnotify.defaults.shadow = false
+  $.pnotify.defaults.sticker = false
+  $.pnotify.defaults.history = false
+
   $document = $(document)
   $window = $(window)
   $body = $('body')

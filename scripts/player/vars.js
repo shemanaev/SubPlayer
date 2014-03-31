@@ -22,13 +22,14 @@ var localSubtitles
 
 $(function () {
   'use strict';
+
   // Log in to opensubtitles.org
   function osLoginDone(response, status, jqXHR) {
     osToken = response[0].token
   }
 
   function osLoginFail(jqXHR, status, error) {
-    console.log('xmlrpc login', error)
+    $.pnotify({ text: 'Error logging in OpenSubtitles.org' })
   }
 
   var params =

@@ -35,7 +35,7 @@ $(function () {
     }
 
     reader.onerror = function(event) {
-      console.error('Error reading file:', event.target.error.code)
+      $.pnotify({ text: 'Error reading file: ' + event.target.error.code })
     }
 
     reader.readAsArrayBuffer(file)

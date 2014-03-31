@@ -19,8 +19,7 @@ $(function initTranslationLang() {
     chrome.storage.sync.set(settings)
   })
 
-  var url = buildUrl(YANDEX_TRANSLATOR_BASE + 'getLangs', { key: YANDEX_TRANSLATOR_KEY })
-  $.get(url, function (res) {
+  function translationGetDone(res) {
     for (var i = 0; i < res.length; i++) {
       var lang = res[i]
       var params =
@@ -29,5 +28,12 @@ $(function initTranslationLang() {
         }
       $translationLang.append(JST['translation-language'](params))
     }
-  })
+  }
+
+  function translationGetFail() {
+    $.pnotify({ text: 'Error retrieving available translation languages' })
+  }
+
+  var url = buildUrl(YANDEX_TRANSLATOR_BASE + 'getLangs', { key: YANDEX_TRANSLATOR_KEY })
+  $.get(url).done(translationGetDone).fail(translationGetFail)
 })

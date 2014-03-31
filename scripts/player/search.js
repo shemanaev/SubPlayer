@@ -54,6 +54,7 @@ $(function () {
 
     function osSearchFail(jqXHR, status, error) {
       $subSelector.append(JST['subtitles-error']('Error while searching subtitles: ' + error))
+      $.pnotify({ text: 'Error while searching subtitles' })
     }
 
     function osSearchAlways() {
@@ -108,8 +109,7 @@ $(function () {
       }
 
       var getSubsFail = function (error) {
-        // TODO: display error
-        console.log('getSubsFail', error)
+        $.pnotify({ text: 'Error retrieving subtitles file' })
       }
 
       getBinary(sub, getSubsDone, getSubsFail)

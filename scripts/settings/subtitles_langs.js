@@ -43,7 +43,7 @@ $(function initSubtitlesLangs() {
   }
 
   function osLangsFail(jqXHR, status, error) {
-    console.log('xmlrpc langs', error)
+    $.pnotify({ text: 'Error retrieving available languages: ' + error })
   }
 
   var params =

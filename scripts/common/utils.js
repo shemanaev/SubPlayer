@@ -59,17 +59,56 @@ function cp1251ToUTF8(s) {
   for (var i = 0; i < s.length; i++) {
     var ord = s[i]
     if (!(ord in map))
-      throw new Error('Character "' + s.charAt(i) + '" is not supported by encoding converter!')
+      throw new Error('Character "' + ord + '" is not supported by encoding converter!')
     L.push(String.fromCharCode(map[ord]))
   }
 
   return L.join('')
 }
 
+// https://github.com/paulmillr/es6-shim/blob/771e98e789292706d2435e4e10ffbe45edf40da6/es6-shim.js#L63
+// Modified for getting params in usual way since Chrome's limits on params size
+function fromCodePoint(points) {
+  'use strict';
+
+  function sign(value) {
+    var number = +value;
+    if (number === 0) return number;
+    if (Number.isNaN(number)) return number;
+    return number < 0 ? -1 : 1;
+  }
+
+  function toInteger(value) {
+    var number = +value;
+    if (Number.isNaN(number)) return 0;
+    if (number === 0 || !Number.isFinite(number)) return number;
+    return sign(number) * Math.floor(Math.abs(number));
+  }
+
+  var result = []
+  var next
+  for (var i = 0, length = points.length; i < length; i++) {
+    next = Number(points[i])
+    if (!Object.is(next, toInteger(next)) ||
+        next < 0 || next > 0x10FFFF) {
+      throw new RangeError('Invalid code point ' + next);
+    }
+
+    if (next < 0x10000) {
+      result.push(String.fromCharCode(next))
+    } else {
+      next -= 0x10000
+      result.push(String.fromCharCode((next >> 10) + 0xD800))
+      result.push(String.fromCharCode((next % 0x400) + 0xDC00))
+    }
+  }
+  return result.join('')
+}
+
 function uintToString(uintArray) {
   'use strict';
 
-  var encodedString = String.fromCharCode.apply(null, uintArray)
+  var encodedString = fromCodePoint(uintArray)
   var decodedString = decodeURIComponent(escape(encodedString))
 
   return decodedString

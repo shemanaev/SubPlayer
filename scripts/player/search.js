@@ -76,22 +76,21 @@ $(function () {
   $subGo.bind('click', findSubtitlesClick)
 
   function setupPlayer(sub) {
-    sub = fixEncoding(sub)
-    if (api) {
-      api.loadSubtitles(sub)
-      return
+    if (!api) {
+      // Create new player
+      $player.html(JST.player({ src: urlParams.src, type: urlParams.type }))
+      // There is MUST be non-local swf as local version violates sandbox rules for ExternalInterface
+      // on chrome-extensions:// pages
+      // Another option (but it's for development only) is to add 'chrome-extension://' address
+      // to flash as trusted location at
+      // http://www.macromedia.com/support/documentation/en/flashplayer/help/settings_manager04.html
+      // (solution from https://code.google.com/p/chromium/issues/detail?id=42796#c10)
+      $player.flowplayer({ swf: 'https://releases.flowplayer.org/5.4.6/flowplayer.swf', tooltip: false })
+      $player.append($translation)
+      $window.resize()
+      api = $player.data('flowplayer')
     }
-    $player.html(JST.player({ src: urlParams.src, type: urlParams.type, sub: sub }))
-    // There is MUST be non-local swf as local version violates sandbox rules for ExternalInterface
-    // on chrome-extensions:// pages
-    // Another option (but it's for development only) is to add 'chrome-extension://' address
-    // to flash as trusted location at
-    // http://www.macromedia.com/support/documentation/en/flashplayer/help/settings_manager04.html
-    // (solution from https://code.google.com/p/chromium/issues/detail?id=42796#c10)
-    $player.flowplayer({ swf: 'https://releases.flowplayer.org/5.4.6/flowplayer.swf', tooltip: false })
-    api = $player.data('flowplayer')
-    $window.resize()
-    $player.append($translation)
+    api.loadSubtitles(fixEncoding(sub))
   }
 
   // run player on modal hide

@@ -120,6 +120,8 @@ function uintToString(uintArray) {
 function fixEncoding(s) {
   'use strict';
 
+  if (!s) return s
+
   var result
   try {
     result = uintToString(s)
